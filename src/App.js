@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Axios from 'axios'
 
 import { Header, Footer } from './components'
 import { NameForm, Results } from './containers'
@@ -18,18 +17,11 @@ class App extends Component {
     this.resetResult = this.resetResult.bind(this)
   }
 
-  tonaldSays (name) {
-    Axios.get(`https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=${name}`)
-      .then ((response) => {
-        this.setState({
-          quote: response.data.message
-        })
-      })
-      .catch((error) => {
-        this.setState({
-          quote: `You are such a terrible human being, even Tonald Drump doesn't want to have any business with you.`
-        })
-      })
+  componentDidMount () {
+    let randomFace = Math.floor(Math.random() * 50000)
+    this.setState({
+      randomFace
+    })
   }
 
   handleForm (inputForm) {
@@ -37,15 +29,12 @@ class App extends Component {
       name: inputForm.name,
       loc: inputForm.location,
       isSubmitted: true
-    }, () => {
-      this.tonaldSays(this.state.name)
     })
   }
 
   resetResult () {
-    console.log("hahahha")
     this.setState({
-      quote: null
+      isSubmitted: false,
     })
   }
 
@@ -55,7 +44,7 @@ class App extends Component {
         <Header />
         <NameForm handleForm={this.handleForm}/>
         <br />
-        { this.state.quote && <Results quote={this.state.quote} resetResult={this.resetResult}/> }
+        { this.state.isSubmitted && <Results resetResult={this.resetResult}/> }
         <Footer randomFace={this.state.randomFace}/>
       </div>
     )
