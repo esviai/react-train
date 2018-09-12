@@ -1,5 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
+import { Link, Redirect } from 'react-router-dom'
 
 import { TonaldSays } from '../components'
 
@@ -31,16 +32,27 @@ class Results extends React.Component {
     }, () => this.props.resetResult())
   }
 
-  render () {
+  redir() {
     return (
-      <div>
-        <TonaldSays quote={this.state.quote}/>
-        <br />
-        <div className="has-text-centered">
-          <p className="button" onClick={this.reset}>Start Over</p>
-        </div>
-      </div>
+      <Redirect to={{
+        pathname: "/"
+      }} />
     )
+  }
+
+  render () {
+    if (this.props.isSubmitted) {
+      return (
+        <div>
+          <TonaldSays quote={this.state.quote}/>
+          <br />
+          <div className="has-text-centered">
+            <Link  to="/" className="button is-primary is-outlined is-large">Start Over</Link>
+          </div>
+        </div>
+      )
+    }
+    return this.redir()
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { Header, Footer } from './components'
 import { NameForm, Results } from './containers'
@@ -40,13 +41,16 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        <NameForm handleForm={this.handleForm}/>
-        <br />
-        { this.state.isSubmitted && <Results resetResult={this.resetResult}/> }
-        <Footer randomFace={this.state.randomFace}/>
-      </div>
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Switch>
+            <Route path="/sad-world" component={(props) => <Results name={this.state.name} resetResult={this.resetResult} isSubmitted={this.state.isSubmitted}/>} />
+            <Route path="/" component={(props) => <NameForm handleForm={this.handleForm}/> } />
+          </Switch>
+          <Footer randomFace={this.state.randomFace}/>
+        </div>
+      </BrowserRouter>
     )
   }
 }

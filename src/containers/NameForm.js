@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class NameForm extends React.Component {
   constructor(props) {
@@ -56,8 +56,7 @@ class NameForm extends React.Component {
                 />
               </p>
             </div>
-            <p className="button is-primary" onClick={() => this.props.handleForm(this.state)}>Submit</p>
-            {/*<Link to="/sad-world" onClick={() => this.props.handleForm(this.state)} className="button is-primary">Submit</Link>*/}
+            <Link to="/sad-world" onClick={() => this.props.handleForm(this.state)} className="button is-primary">Submit</Link>
           </div>
         </div>
       </div>
