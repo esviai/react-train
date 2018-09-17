@@ -1,7 +1,8 @@
 const initialState = {
   name: null,
   loc: null,
-  isSubmitted: false
+  isSubmitted: false,
+  quote: null
 }
 
 export default (state=initialState, action) => {
@@ -20,6 +21,11 @@ export default (state=initialState, action) => {
       return {
         ...state,
         loc: action.payload
+      }
+    case 'TONALD_SAYS':
+      return {
+        ...state,
+        quote: action.payload
       }
     default:
       return state

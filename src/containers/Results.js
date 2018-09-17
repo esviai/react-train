@@ -4,35 +4,19 @@ import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { TonaldSays } from '../components'
+import { tonaldSays } from '../actions'
 
 class Results extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      quote: null
-    }
   }
 
   componentDidMount() {
     if(this.props.form.isSubmitted) {
-      this.tonaldSays(this.props.form.name)
+      this.props.tonaldSays(this.props.form.name)
     } else {
       this.redir()
     }
-  }
-
-  tonaldSays (name) {
-    Axios.get(`https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=${name}`)
-      .then ((response) => {
-        this.setState({
-          quote: response.data.message
-        })
-      })
-      .catch((error) => {
-        this.setState({
-          quote: `You are such a terrible human being, even Tonald Drump doesn't want to have any business with you.`
-        })
-      })
   }
 
   reset = () => {
@@ -53,7 +37,7 @@ class Results extends React.Component {
     if (this.props.form.isSubmitted) {
       return (
         <div>
-          <TonaldSays quote={this.state.quote}/>
+          <TonaldSays quote={this.props.form.quote}/>
           <br />
           <div className="has-text-centered">
             <Link  to="/" className="button is-primary is-outlined is-large">Start Over</Link>
@@ -67,8 +51,15 @@ class Results extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    form: state.form
+    form: state.form,
   }
 }
 
-export default connect(mapStateToProps, null)(Results)
+const mapDispatchToProps = dispatch => {
+  return {
+    tonaldSays: (name) => dispatch(tonaldSays(name))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results)

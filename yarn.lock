@@ -222,6 +222,10 @@ array-reduce@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/array-reduce/-/array-reduce-0.0.0.tgz#173899d3ffd1c7d9383e4479525dbe278cab5f2b"
 
+array-slice@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/array-slice/-/array-slice-0.2.3.tgz#dd3cfb80ed7973a75117cdac69b0b99ec86186f5"
+
 array-union@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"
@@ -1592,6 +1596,10 @@ console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
 
+console@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/console/-/console-0.5.2.tgz#ab20ccf5e16c92f9253816eef3b7ae78f7ad1f43"
+
 constants-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
@@ -1865,6 +1873,10 @@ decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
 decode-uri-component@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
+
+deep-diff@^0.3.5:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
 
 deep-equal@^1.0.1:
   version "1.0.1"
@@ -5518,6 +5530,13 @@ react-error-overlay@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.1.tgz#417addb0814a90f3a7082eacba7cee588d00da89"
 
+react-logger@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-logger/-/react-logger-1.1.0.tgz#a400bb9f3d403bc87c1230b865691540a7fbde4a"
+  dependencies:
+    array-slice "^0.2.3"
+    console "^0.5.2"
+
 react-redux@^5.0.7:
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
@@ -5692,6 +5711,16 @@ reduce-function-call@^1.0.1:
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux-logger@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
+  dependencies:
+    deep-diff "^0.3.5"
+
+redux-thunk@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
 
 redux@^4.0.0:
   version "4.0.0"
