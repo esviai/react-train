@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import store from '../store/configureStore'
+import { handleForm, handleName, handleLoc } from '../actions'
 
 class NameForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: null,
-      location: null
+      name: store.getState().form.name,
+      location: store.getState().form.loc
     }
   }
 
@@ -38,7 +40,7 @@ class NameForm extends React.Component {
               <label className="label">Nickname</label>
               <p className="control">
                 <input
-                  onChange={(e) => this.setName(e.target.value)}
+                  onChange={(e) => store.dispatch(handleName(e.target.value))}
                   className="input"
                   type="text"
                   placeholder="Nickname"
@@ -49,14 +51,14 @@ class NameForm extends React.Component {
               <label className="label">Country</label>
               <p className="control">
                 <input
-                  onChange={(e) => this.setLocation(e.target.value)}
+                  onChange={(e) => store.dispatch(handleLoc(e.target.value))}
                   className="input"
                   type="text"
                   placeholder="Where do you come from?"
                 />
               </p>
             </div>
-            <Link to="/sad-world" onClick={() => this.props.handleForm(this.state)} className="button is-primary">Submit</Link>
+            <Link to="/sad-world" onClick={() => store.dispatch(handleForm())} className="button is-primary">Submit</Link>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import Axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 
+import store from '../store/configureStore'
 import { TonaldSays } from '../components'
 
 class Results extends React.Component {
@@ -13,7 +14,15 @@ class Results extends React.Component {
   }
 
   componentDidMount() {
-    Axios.get(`https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=${this.props.name}`)
+    if(store.getState().form.isSubmitted) {
+      this.tonaldSays(store.getState().form.name)
+    } else {
+      this.redir()
+    }
+  }
+
+  tonaldSays (name) {
+    Axios.get(`https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=${name}`)
       .then ((response) => {
         this.setState({
           quote: response.data.message
@@ -41,7 +50,7 @@ class Results extends React.Component {
   }
 
   render () {
-    if (this.props.isSubmitted) {
+    if (store.getState().form.isSubmitted) {
       return (
         <div>
           <TonaldSays quote={this.state.quote}/>
