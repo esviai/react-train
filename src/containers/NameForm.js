@@ -1,15 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import store from '../store/configureStore'
+import { connect } from 'react-redux'
 import { handleForm, handleName, handleLoc } from '../actions'
 
 class NameForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      name: store.getState().form.name,
-      location: store.getState().form.loc
-    }
   }
 
   setName(name) {
@@ -40,7 +36,7 @@ class NameForm extends React.Component {
               <label className="label">Nickname</label>
               <p className="control">
                 <input
-                  onChange={(e) => store.dispatch(handleName(e.target.value))}
+                  onChange={(e) => this.props.handleName(e.target.value)}
                   className="input"
                   type="text"
                   placeholder="Nickname"
@@ -51,14 +47,14 @@ class NameForm extends React.Component {
               <label className="label">Country</label>
               <p className="control">
                 <input
-                  onChange={(e) => store.dispatch(handleLoc(e.target.value))}
+                  onChange={(e) => this.props.handleLoc(e.target.value)}
                   className="input"
                   type="text"
                   placeholder="Where do you come from?"
                 />
               </p>
             </div>
-            <Link to="/sad-world" onClick={() => store.dispatch(handleForm())} className="button is-primary">Submit</Link>
+            <Link to="/sad-world" onClick={() => this.props.handleForm()} className="button is-primary">Submit</Link>
           </div>
         </div>
       </div>
@@ -66,4 +62,18 @@ class NameForm extends React.Component {
   }
 }
 
-export default NameForm
+const mapStateToProps = state => {
+  return {
+    form: state.form
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleForm: () => dispatch(handleForm()),
+    handleName: (name) => dispatch(handleName(name)),
+    handleLoc: (loc) => dispatch(handleLoc(loc))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NameForm)

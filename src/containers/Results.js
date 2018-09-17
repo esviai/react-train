@@ -1,8 +1,8 @@
 import React from 'react'
 import Axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import store from '../store/configureStore'
 import { TonaldSays } from '../components'
 
 class Results extends React.Component {
@@ -14,8 +14,8 @@ class Results extends React.Component {
   }
 
   componentDidMount() {
-    if(store.getState().form.isSubmitted) {
-      this.tonaldSays(store.getState().form.name)
+    if(this.props.form.isSubmitted) {
+      this.tonaldSays(this.props.form.name)
     } else {
       this.redir()
     }
@@ -50,7 +50,7 @@ class Results extends React.Component {
   }
 
   render () {
-    if (store.getState().form.isSubmitted) {
+    if (this.props.form.isSubmitted) {
       return (
         <div>
           <TonaldSays quote={this.state.quote}/>
@@ -65,4 +65,10 @@ class Results extends React.Component {
   }
 }
 
-export default Results
+const mapStateToProps = state => {
+  return {
+    form: state.form
+  }
+}
+
+export default connect(mapStateToProps, null)(Results)

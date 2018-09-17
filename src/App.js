@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
+import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { Header, Footer } from './components'
 import { NameForm, Results } from './containers'
+import store from './store/configureStore'
 
 class App extends Component {
   constructor () {
     super()
     this.state = {
-      name: null,
-      loc: null,
       randomFace: null,
-      issubmitted: false,
-      quote: null
     }
-    this.handleForm = this.handleForm.bind(this)
     this.resetResult = this.resetResult.bind(this)
   }
 
@@ -22,14 +19,6 @@ class App extends Component {
     let randomFace = Math.floor(Math.random() * 50000)
     this.setState({
       randomFace
-    })
-  }
-
-  handleForm (inputForm) {
-    this.setState({
-      name: inputForm.name,
-      loc: inputForm.location,
-      isSubmitted: true
     })
   }
 
@@ -41,16 +30,18 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div>
-          <Header />
-          <Switch>
-            <Route path="/sad-world" component={(props) => <Results name={this.state.name} resetResult={this.resetResult} isSubmitted={this.state.isSubmitted}/>} />
-            <Route path="/" component={(props) => <NameForm handleForm={this.handleForm}/> } />
-          </Switch>
-          <Footer randomFace={this.state.randomFace}/>
-        </div>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div>
+            <Header />
+            <Switch>
+              <Route path="/sad-world" component={(props) => <Results name={this.state.name} resetResult={this.resetResult} isSubmitted={this.state.isSubmitted}/>} />
+              <Route path="/" component={(props) => <NameForm /> } />
+            </Switch>
+            <Footer randomFace={this.state.randomFace}/>
+          </div>
+        </BrowserRouter>
+      </Provider>
     )
   }
 }
